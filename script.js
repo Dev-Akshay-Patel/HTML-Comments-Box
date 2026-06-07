@@ -11,7 +11,29 @@ const REPLY_PARENT_ID = commentBox.querySelector('.reply-parent-id');
 const REPLY_IMMEDIATE_ID = commentBox.querySelector('.reply-immediate-id');
 let REPLY_TO_NAME = '';
 let MENTION_PREFIX = '';
+const modal = document.getElementById("comment-modal-overlay");
+const openBtn = document.getElementById("open-comments");
+const closeBtn = document.querySelector(".comment-close-btn");
 
+openBtn.addEventListener("click", () => {
+    modal.classList.add("active");
+});
+
+closeBtn.addEventListener("click", () => {
+    modal.classList.remove("active");
+});
+
+modal.addEventListener("click", e => {
+    if (e.target === modal) {
+        modal.classList.remove("active");
+    }
+});
+
+const themeBtn = document.getElementById("theme-toggle");
+
+themeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+});
 const MAX_CHARS = 500;
 const MIN_NAME_LENGTH = 3;
 const MAX_NAME_LENGTH = 15;
