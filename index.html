@@ -3,159 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comment System Demo</title>
+    <title>HTML Comment System Demo</title>
 
-    <!-- Font Awesome -->
+    <meta name="description" content="Lightweight HTML Comment System with replies, sorting and dark mode.">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <!--  CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root{
+            --Mainbg:#ffffff;
+            --border:1px solid #e5e5e5;
+            --color:#222;
+            --txtcolor:#222;
+            --commenttlb:#f5f5f5;
+            --search-header-x:#f0f0f0;
+        }
+
+        body.dark-mode{
+            --Mainbg:#161616;
+            --border:1px solid #444;
+            --color:#f5f5f5;
+            --txtcolor:#f5f5f5;
+            --commenttlb:#252525;
+            --search-header-x:#333;
+            background:#111;
+        }
+
+        body{
+            margin:0;
+            font-family:Arial,sans-serif;
+            background:var(--Mainbg);
+            color:var(--color);
+            transition:.25s;
+        }
+
+        .demo-header{
+            position:fixed;
+            top:20px;
+            right:20px;
+            z-index:1000;
+        }
+
+        .theme-btn{
+            width:50px;
+            height:50px;
+            border:none;
+            border-radius:50%;
+            cursor:pointer;
+            background:#fff;
+            box-shadow:0 4px 15px rgba(0,0,0,.15);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        body.dark-mode .theme-btn{
+            background:#222;
+            color:#fff;
+        }
+
+        .hero{
+            text-align:center;
+            padding:80px 20px 40px;
+        }
+
+        .hero h1{
+            font-size:3rem;
+            margin-bottom:10px;
+        }
+
+        .hero p{
+            max-width:700px;
+            margin:auto;
+            color:#777;
+            line-height:1.6;
+        }
+
+        body.dark-mode .hero p{
+            color:#bbb;
+        }
+
+        .comment-wrapper{
+            max-width:800px;
+            margin:auto;
+            padding:20px;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Comment Modal -->
-    <div id="comment-modal-overlay" class="comment-modal-overlay">
-        <div class="comment-mdl">
+<header class="demo-header">
+    <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+        <svg width="22" height="22" viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1111.21 3
+                     7 7 0 0021 12.79z"/>
+        </svg>
+    </button>
+</header>
 
-            <div class="comment-mdl-header">
-                Comments
-                <button class="comment-close-btn" aria-label="Close Comments">
-                    &times;
-                </button>
-            </div>
+<section class="hero">
+    <h1>HTML Comment System</h1>
+    <p>
+        Lightweight comment system built with HTML, CSS and JavaScript.
+        Features nested replies, sorting, moderation support,
+        responsive design and dark mode.
+    </p>
+</section>
 
-            <div class="comment-mdl-body" id="comment-modal-body">
+<div class="comment-wrapper">
 
-                <!-- Comment Box -->
-                <div class="comment-box">
+    <div class="comment-box">
 
-                    <input type="hidden" class="reply-parent-id">
-                    <input type="hidden" class="reply-immediate-id">
+        <input type="hidden" class="reply-parent-id">
+        <input type="hidden" class="reply-immediate-id">
 
-                    <div class="add-comment">
+        <div class="add-comment">
 
-                        <div class="name-input-container">
-                            <div class="input-wrapper">
-                                <input type="text" class="name-input" placeholder="Your name">
-                            </div>
+            <div class="name-input-container">
 
-                            <div class="input-wrapper">
-                                <input type="email" class="email-input" placeholder="Your email (optional)">
-                            </div>
-                        </div>
+                <div class="input-wrapper">
+                    <input type="text"
+                           class="name-input"
+                           placeholder="Your name">
+                </div>
 
-                        <textarea placeholder="Share your thoughts..." rows="3" maxlength="500"></textarea>
-
-                        <div class="char-counter">
-                            0 / 500
-                        </div>
-
-                        <div class="comment-toolbar">
-                            <button class="submit-btn">
-                                <i class="fas fa-paper-plane"></i>
-                                Post
-                            </button>
-                        </div>
-
-                    </div>
-
-                    <div class="comment-sort">
-                        <span>
-                            Comments (
-                            <strong class="comment-count">
-                                <span class="loading-spinner"></span>
-                            </strong>
-                            )
-                        </span>
-
-                        <select>
-                            <option value="desc">Most recent</option>
-                            <option value="asc">Oldest</option>
-                        </select>
-                    </div>
-
-                    <!-- Pinned Comment -->
-                    <div class="comments-pinned">
-                        <div class="comment">
-
-                            <div class="comment-header">
-                                <div class="comment-avatar-gradient"></div>
-
-                                <div class="comment-user">
-                                    <strong>
-                                        BWS Bot
-                                        <i class="fas fa-check-circle verified-badge" title="Verified"></i>
-                                    </strong>
-
-                                    <span class="time">Pinned</span>
-                                </div>
-                            </div>
-
-                            <div class="comment-content">
-                                <p>
-                                    Please avoid hate, spam, or offensive content.
-                                    Every comment is monitored, and we aim to keep
-                                    this space respectful and safe for all users.
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- Dynamic Comments -->
-                    <div class="comments-section">
-                        <!-- Loaded comments here by JavaScript -->
-                    </div>
-
+                <div class="input-wrapper">
+                    <input type="email"
+                           class="email-input"
+                           placeholder="Your email (optional)">
                 </div>
 
             </div>
 
-            <div class="comment-mdl-footer">
+            <textarea
+                placeholder="Share your thoughts..."
+                rows="4"
+                maxlength="500"></textarea>
 
-                <span>
-                    Be nice, constructive and respectful.
-                </span>
+            <div class="char-counter">
+                0 / 500
+            </div>
 
-                <button class="scroll-to-top-btn" title="Scroll to top">
-
-                    <svg width="20"
-                         height="20"
-                         viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="#767676"
-                         stroke-width="2"
-                         stroke-linecap="round"
-                         stroke-linejoin="round">
-
-                        <polyline points="18 15 12 9 6 15"></polyline>
-
-                    </svg>
-
+            <div class="comment-toolbar">
+                <button class="submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Post
                 </button>
+            </div>
+
+        </div>
+
+        <div class="comment-sort">
+            <span>
+                Comments (
+                <strong class="comment-count">0</strong>
+                )
+            </span>
+
+            <select>
+                <option value="desc">Most recent</option>
+                <option value="asc">Oldest</option>
+            </select>
+        </div>
+
+        <div class="comments-pinned">
+
+            <div class="comment">
+
+                <div class="comment-header">
+
+                    <div class="comment-avatar-gradient"></div>
+
+                    <div class="comment-user">
+                        <strong>
+                            BWS Bot
+                            <i class="fas fa-check-circle verified-badge"></i>
+                        </strong>
+
+                        <span class="time">
+                            Pinned
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="comment-content">
+                    <p>
+                        Please avoid hate, spam or offensive content.
+                        Every comment is monitored and we aim to keep
+                        this space respectful and safe for all users.
+                    </p>
+                </div>
 
             </div>
 
         </div>
+
+        <div class="comments-section">
+            <!-- Comments loaded by script.js -->
+        </div>
+
     </div>
 
-    <!--  JavaScript -->
-    <script src="script.js"></script>
-<header class="demo-header">
-  <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
-    <svg id="theme-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M21 12.79A9 9 0 1111.21 3c0 .28.02.56.05.84A7 7 0 0021 12.79z"/>
-    </svg>
-  </button>
-</header>
-
-<div class="demo-container">
-  <h1>HTML Comment System Demo</h1>
-  <p>Modal-based comment system with replies, sorting, dark mode and responsive design.</p>
-
-  <button id="open-comments" class="demo-btn">
-    Open Comments Demo
-  </button>
 </div>
+
+<script>
+document.getElementById("theme-toggle").addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+});
+</script>
+
+<script src="script.js"></script>
+
 </body>
 </html>
