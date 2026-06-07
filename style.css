@@ -20,7 +20,60 @@ body.dark-mode {
 --txtcolor: #d5d5d5;
 --comment-mention: #fa884752
 }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+    min-height: 100vh;
+}
 
+.demo-header {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+}
+
+.theme-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,.15);
+}
+
+.demo-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    padding: 20px;
+}
+
+.demo-container h1 {
+    margin: 0;
+    font-size: 3rem;
+}
+
+.demo-container p {
+    max-width: 600px;
+    color: #666;
+}
+
+.demo-btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 10px;
+    background: #fa8847;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
 
 :root {
   --langdrop: rgb(255, 255, 255);
