@@ -20,6 +20,89 @@ body.dark-mode {
 --txtcolor: #d5d5d5;
 --comment-mention: #fa884752
 }
+
+
+:root {
+  --langdrop: rgb(255, 255, 255);
+  --header-bg: rgba(255, 255, 255, 0.3);
+  --svg-stroke-color: #323232;
+  --svg-fill-color: #cccccc00;
+  --solid-fill: #424242;
+  --border: 1px solid #cecece;
+  --border-color: #cecece;
+  --Mainbg: rgb(255, 255, 255);
+  --sideBG: linear-gradient(to bottom, rgb(255, 255, 255), rgb(255 255 255), rgb(253, 237, 218));
+  --color: rgb(65, 65, 65);
+  --bgIMG: linear-gradient(to right, rgba(94, 94, 94, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(92, 92, 92, 0.04) 1px, transparent 1px);
+  --accordionbg: rgb(247 247 247);
+  --evenchildtable: #eeeeee;
+  --tablestriphover: #9191913f;
+  --blockqcolor: #636363;
+  --footerbg: #ffffff;
+  --blogcardbg: #ffffff;
+  --blogcardesc: #4d4d4d;
+  --blogcardtag: rgb(233, 233, 233);
+  --labletag: #e9e9e9;
+  --infoheading: #004080;
+  --alertheading: #614700;
+  --errorheading: #820014;
+  --successheading: #135200;
+  --image-wrapper: rgba(255, 255, 255, 0);
+  --border-submenu: 2px solid rgb(87, 87, 87);
+  --search-header-x: #eeeeee;
+  --bookmark-bg: rgba(255, 255, 255, 0.8);
+  --postmetaicons: #f1f1f1;
+  --bookmark-shimmer: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  --postmeta-border: none;
+  --avail: #f7a3ab;
+  --beige: #f5f5dc;
+  --beige-dual: rgb(65, 65, 65);
+  --hr-color: rgb(51, 51, 51);
+  --mcqselectedbg: #ff6e3947;
+  --primary-color:#ff7340;
+}
+
+body.dark-mode {
+  --primary-color:#ff7340;
+  --langdrop: rgb(45, 45, 45);
+  --beige-dual: #f5f5dc;
+  --beige: #f5f5dc;
+  --header-bg: rgba(65, 65, 65, 0.3);
+  --border: 1px solid #636363;
+  --svg-stroke-color: #e0e0e0;
+  --svg-fill-color: #cccccc00;
+  --solid-fill: #e0e0e0;
+  --Mainbg: rgb(24, 24, 24);
+  --sideBG: linear-gradient(to bottom, rgb(37, 37, 37), rgb(37, 37, 37), rgb(22, 22, 22));
+  --color: rgba(238, 238, 238, 0.884);
+  --bgIMG: linear-gradient(to right, rgba(106, 106, 106, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(99, 99, 99, 0.04) 1px, transparent 1px);
+  --accordionbg: rgb(40 40 40);
+  --evenchildtable: #1f1f1f;
+  --tablestriphover: #25252549;
+  --blockqcolor: #ccc;
+  --footerbg: #0000004d;
+  --blogcardbg: #232323;
+  --blogcardesc: #c3c3c3;
+  --blogcardtag: rgb(24, 24, 24);
+  --labletag: #252525;
+  --infowhite: #dbdbdb;
+  --infoheading: #529ce6;
+  --alertheading: #d1aa3f;
+  --errorheading: #f7697e;
+  --successheading: #6bc250;
+  --btndownload: white;
+  --image-wrapper: white;
+  --border-submenu: 2px solid rgb(122, 122, 122);
+  --search-header-x: #353535;
+  --bookmark-bg: rgb(21 21 21 / 74%);
+  --postmetaicons: #252525;
+  --bookmark-shimmer: linear-gradient(90deg, #2a2a2a 25%, #3c3c3c 50%, #2a2a2a 75%);
+  --postmeta-border: 1px solid #636363;
+  --border-color: #636363;
+  --avail: #f47783;
+  --hr-color: rgb(187, 187, 187);
+  --mcqselectedbg: #ff6e3947;
+}
 .comment-trig-end-post {
     display: block;
     margin: 40px auto;
