@@ -95,7 +95,7 @@ function initCommentBox() {
 
 let badWords = [];
 
-fetch('https://bitwisestudy.web.app/json/profanity.json')
+fetch('profanity.json')
   .then(res => res.json())
   .then(data => {
     badWords = data.map(word => word.toLowerCase());
