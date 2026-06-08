@@ -69,15 +69,25 @@ We will be using appsscirpt to store comment for your website. Follow these step
 
 STEP 1 - GO TO GOOGLE SHEETS CLICK ON BLANK SPREADSHEET
 <img width="1540" height="232" alt="image" src="https://github.com/user-attachments/assets/6c894056-7be8-46bb-b9b5-4526ebd13829" />
+
 STEP 2 - CLICK ON + TO CREATE NEW SHEET AND NAME IT 'settings'
+
 <img width="115" height="103" alt="image" src="https://github.com/user-attachments/assets/79b0caa7-d1ca-45ea-be9e-1cc80e2cd059" />
+
 STEP 3 - NAME THE COLUMNS IN SETTINGS SHEET - THIS WILL HELPS YOU TO STOP AND CONTINUE NEW COMMENTS FROM BEING ADDED (USE true AND false) TRUE TO ALLOW FALSE TO STOP
+
 <img width="898" height="43" alt="image" src="https://github.com/user-attachments/assets/5b8c6a4d-8aa2-4147-b454-16ca8d9c3bcd" />
+
 STEP 4 - CLICK ON EXTENSION AND SELECT APPSCRIPT
+
 <img width="548" height="61" alt="image" src="https://github.com/user-attachments/assets/1ad0d5bc-672d-456d-b6e1-859540485110" />
+
 STEP 5 - PASTE THE APPSSCRIPT FILE INTO CODE.GS (MAKE SURE YOU HAVE CHANGED THE EMAIL)
+
 <img width="1915" height="939" alt="image" src="https://github.com/user-attachments/assets/9749bea2-61df-4051-ac20-0fad9dc6aec4" />
+
 STEP 6 - Deploy > New Deployment > Select Type > Web App > Execute As (Me) > Who has access > Anyone > Deploy
+
 STEP 7 - COPY THE LINK AND PASTE IN SCRIPT.JS WHEREEVER THERE IS TEXT YOUR APPSCRIPT LINK
 
 
