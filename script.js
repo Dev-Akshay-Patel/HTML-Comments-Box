@@ -1,39 +1,46 @@
-const commentBox = document.querySelector('.comment-box');
-const textarea = commentBox.querySelector('textarea');
-const charCounter = commentBox.querySelector('.char-counter');
-const submitBtn = commentBox.querySelector('.submit-btn');
-const commentsSection = commentBox.querySelector('.comments-section');
-const commentCountEl = commentBox.querySelector('.comment-count');
-const sortSelect = commentBox.querySelector('select');
-const nameInput = commentBox.querySelector('.name-input');
-const emailInput = commentBox.querySelector('.email-input');
-const REPLY_PARENT_ID = commentBox.querySelector('.reply-parent-id');
-const REPLY_IMMEDIATE_ID = commentBox.querySelector('.reply-immediate-id');
+// Get the modal overlay and trigger button
+const commentModalOverlay = document.getElementById('comment-modal-overlay');
+const triggerBtn = document.querySelector('.comment-box-mld');
+
+// These will be assigned after the modal is opened
+let commentBox, textarea, charCounter, submitBtn, commentsSection, commentCountEl, sortSelect, nameInput, emailInput, REPLY_PARENT_ID, REPLY_IMMEDIATE_ID;
 let REPLY_TO_NAME = '';
 let MENTION_PREFIX = '';
-const modal = document.getElementById("comment-modal-overlay");
-const openBtn = document.getElementById("open-comments");
-const closeBtn = document.querySelector(".comment-close-btn");
 
-openBtn.addEventListener("click", () => {
-    modal.classList.add("active");
+// Open modal when trigger button is clicked
+if (triggerBtn) {
+  triggerBtn.addEventListener('click', () => {
+    commentModalOverlay.classList.add('active');
+    initCommentBox();
+  });
+}
+
+// Close modal when close button is clicked
+const closeBtn = document.querySelector('.comment-close-btn');
+if (closeBtn) {
+  closeBtn.addEventListener('click', () => {
+    commentModalOverlay.classList.remove('active');
+  });
+}
+
+// Close modal when clicking outside
+commentModalOverlay.addEventListener('click', (e) => {
+  if (e.target === commentModalOverlay) {
+    commentModalOverlay.classList.remove('active');
+  }
 });
 
-closeBtn.addEventListener("click", () => {
-    modal.classList.remove("active");
-});
-
-modal.addEventListener("click", e => {
-    if (e.target === modal) {
-        modal.classList.remove("active");
+// Scroll to top button
+const scrollToTopBtn = document.querySelector('.scroll-to-top-btn');
+if (scrollToTopBtn) {
+  scrollToTopBtn.addEventListener('click', () => {
+    const modalBody = document.getElementById('comment-modal-body');
+    if (modalBody) {
+      modalBody.scrollTo({ top: 0, behavior: 'smooth' });
     }
-});
+  });
+}
 
-const themeBtn = document.getElementById("theme-toggle");
-
-themeBtn.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
-});
 const MAX_CHARS = 500;
 const MIN_NAME_LENGTH = 3;
 const MAX_NAME_LENGTH = 15;
@@ -51,28 +58,50 @@ const getTopicFromMeta = () => {
   return cleanPath.replace(/\//g, '-');
 };
 
-const topic = getTopicFromMeta();
+let topic;
 let isAdmin = false;
 let commentsEnabled = true;
 
-textarea.addEventListener('input', updateCharCounter);
-submitBtn.addEventListener('click', submitComment);
-sortSelect.addEventListener('change', () => fetchComments(sortSelect.value));
-textarea.addEventListener('keydown', handleBackspace);
-nameInput.addEventListener('input', handleNameInput);
-nameInput.addEventListener('blur', validateName);
-
-checkCommentStatus();
+function initCommentBox() {
+  // Only initialize once
+  if (commentBox) return;
+  
+  commentBox = document.querySelector('.comment-box');
+  if (!commentBox) return;
+  
+  textarea = commentBox.querySelector('textarea');
+  charCounter = commentBox.querySelector('.char-counter');
+  submitBtn = commentBox.querySelector('.submit-btn');
+  commentsSection = commentBox.querySelector('.comments-section');
+  commentCountEl = commentBox.querySelector('.comment-count');
+  sortSelect = commentBox.querySelector('select');
+  nameInput = commentBox.querySelector('.name-input');
+  emailInput = commentBox.querySelector('.email-input');
+  REPLY_PARENT_ID = commentBox.querySelector('.reply-parent-id');
+  REPLY_IMMEDIATE_ID = commentBox.querySelector('.reply-immediate-id');
+  
+  topic = getTopicFromMeta();
+  
+  // Add event listeners
+  textarea.addEventListener('input', updateCharCounter);
+  submitBtn.addEventListener('click', submitComment);
+  sortSelect.addEventListener('change', () => fetchComments(sortSelect.value));
+  textarea.addEventListener('keydown', handleBackspace);
+  nameInput.addEventListener('input', handleNameInput);
+  nameInput.addEventListener('blur', validateName);
+  
+  checkCommentStatus();
+}
 
 let badWords = [];
 
-fetch('/json/profanity.json')
+fetch('https://bitwisestudy.web.app/json/profanity.json')
   .then(res => res.json())
   .then(data => {
     badWords = data.map(word => word.toLowerCase());
   })
   .catch(err => console.error('Failed to load profanity.json:', err));
-
+// change according to your link
 function checkCommentStatus() {
   fetch(`https://script.google.com/macros/s/AKfycbyvLjheYK-3NOFHVN01ATl2KftiENYy58sM9IA6QGDroiemY406KPuRp_BFvHE-muyG/exec?action=checkStatus&topic=${encodeURIComponent(topic)}`)
     .then(res => res.json())
@@ -105,9 +134,8 @@ function disableCommentInputs() {
   
   submitBtn.style.display = 'none';
   
-  const charCounterWrapper = charCounter.parentElement;
-  if (charCounterWrapper) {
-    charCounterWrapper.style.display = 'none';
+  if (charCounter && charCounter.parentElement) {
+    charCounter.parentElement.style.display = 'none';
   }
   
   const existingNotice = commentBox.querySelector('.comment-disabled-notice');
@@ -219,7 +247,7 @@ function clearReply() {
   REPLY_IMMEDIATE_ID.value = '';
   REPLY_TO_NAME = '';
   MENTION_PREFIX = '';
-  textarea.placeholder = 'Write your comment here...';
+  textarea.placeholder = 'Share your thoughts...';
 }
 
 function handleBackspace(e) {
@@ -348,6 +376,8 @@ function submitComment() {
 }
 
 function fetchComments(order = 'desc') {
+  if (!commentsSection) return;
+  
   commentsSection.innerHTML = Array(3).fill(`
     <div class="skeletoncom">
       <div class="skeletoncom-circle"></div>
@@ -357,7 +387,7 @@ function fetchComments(order = 'desc') {
       </div>
     </div>
   `).join('');
-
+// change according to your link
   fetch(`https://script.google.com/macros/s/AKfycbyvLjheYK-3NOFHVN01ATl2KftiENYy58sM9IA6QGDroiemY406KPuRp_BFvHE-muyG/exec?topic=${encodeURIComponent(topic)}`)
     .then(res => res.json())
     .then(data => {
@@ -415,7 +445,7 @@ function createCommentElement(comment) {
   const isAdminUser = comment.isAdmin === true || comment.isAdmin === 'true';
 
   if (isAdminUser) {
-    avatar.innerHTML = '<img src="https://avatars.githubusercontent.com/u/123620381?v=4&size=64" class="comment-avatar" alt="Admin Avatar">';
+    avatar.innerHTML = '<img src="/assets/favicons/apple-touch-icon.png" class="comment-avatar" alt="Admin Avatar">';
   } else {
     avatar.innerHTML = `
       <div style="
