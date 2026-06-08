@@ -1,0 +1,152 @@
+:root{
+--vanillabg:rgba(255, 255, 255, 0.836);
+--backdrop-vanilla:blur(5px);
+}
+body.dark-mode {
+--vanillabg:#121212cc;
+--backdrop-vanilla:blur(10px);
+}
+#vanillatoasts-container {
+position: fixed;
+width: 320px;
+font-family: 'outfit';
+pointer-events: none;
+z-index: 9999999999;
+}
+.toasts-top-right{
+top: 0;
+right: 0;
+}
+.toasts-top-left{
+left:0;
+top:0;
+}
+.toasts-bottom-left{
+left: 0;
+bottom:0;
+}
+.toasts-bottom-right{
+bottom:0;
+right: 0;
+}
+.toasts-top-center{
+left: 0;
+top: 0;
+bottom: 0;
+right: 0;
+margin: auto;
+}
+.toasts-bottom-center{
+bottom:0;
+left: 50%;
+transform: translateX(-50%);
+}
+.vanillatoasts-toast {
+position: relative;
+padding: 20px 17px;
+margin: 20px;
+border-radius: 10px;
+background:var(--vanillabg);
+cursor: pointer;
+box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+pointer-events: all;
+border: var(--border);
+backdrop-filter: var(--backdrop-vanilla);
+}
+.toasts-top-right .vanillatoasts-toast,
+.toasts-bottom-right .vanillatoasts-toast {
+animation: VanillaToasts 0.3s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}
+.toasts-bottom-left .vanillatoasts-toast,
+.toasts-top-left .vanillatoasts-toast {
+animation: VanillaToastsFromLeft 0.3s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}
+.toasts-bottom-left .vanillatoasts-fadeOut,
+.toasts-top-left .vanillatoasts-fadeOut {
+animation: VanillaToastsFadeOutLeft 0.3s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
+}
+.vanillatoasts-fadeOut {
+animation-name: VanillaToastsFadeOut;
+animation-duration: .3s;
+animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+animation-fill-mode: forwards;
+}
+#vanillatoasts-container p,
+#vanillatoasts-container h4 {
+margin: 3px 0!important;
+}
+.vanillatoasts-title {
+font-weight: 700;
+font-size: 15px;
+margin-bottom: 10px;
+}
+.vanillatoasts-text {
+font-size: 14px;
+color: #777;
+}
+.vanillatoasts-icon {
+position: absolute;
+top: 5px;
+left: -40px;
+width: 50px;
+height: 50px;
+border-radius: 100%;
+box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+background: #FFF;
+}
+.vanillatoasts-toast a, .vanillatoasts-toast a:hover {
+color: #549EDB !important;
+text-decoration: none !important;
+}
+.vanillatoasts-success {
+border-bottom: 2px solid #51C625;
+}
+.vanillatoasts-warning {
+border-bottom: 2px solid #DB9215;
+}
+.vanillatoasts-error {
+border-bottom: 2px solid #DB2B1D;
+}
+.vanillatoasts-info {
+border-bottom: 2px solid #27ABDB;
+}
+@keyframes VanillaToasts {
+from {
+transform: translate3d(400px, 0, 0);;
+opacity: 0;
+}
+to {
+transform: translate3d(0, 0, 0);
+opacity: 1;
+}
+}
+@keyframes VanillaToastsFadeOut {
+from {
+transform: translate3d(0, 0, 0);
+opacity: 1;
+}
+to {
+transform: translate3d(400px, 0, 0);
+opacity: 0;
+}
+}
+@keyframes VanillaToastsFromLeft {
+from {
+transform: translate3d(-400px, 0, 0);
+opacity: 0;
+}
+to {
+transform: translate3d(0, 0, 0);
+opacity: 1;
+}
+}
+@keyframes VanillaToastsFadeOutLeft {
+from {
+transform: translate3d(0, 0, 0);
+opacity: 1;
+}
+to {
+transform: translate3d(-400px, 0, 0);
+opacity: 0;
+}
+}
