@@ -445,7 +445,7 @@ function createCommentElement(comment) {
   const isAdminUser = comment.isAdmin === true || comment.isAdmin === 'true';
 
   if (isAdminUser) {
-    avatar.innerHTML = '<img src="/assets/favicons/apple-touch-icon.png" class="comment-avatar" alt="Admin Avatar">';
+    avatar.innerHTML = '<img src="https://avatars.githubusercontent.com/u/123620381?v=4&size=64" class="comment-avatar" alt="Admin Avatar">';
   } else {
     avatar.innerHTML = `
       <div style="
