@@ -103,6 +103,7 @@ fetch('profanity.json')
   .catch(err => console.error('Failed to load profanity.json:', err));
 // change according to your link
 function checkCommentStatus() {
+  // PASTEYOUR LINK  LIKE  THIS  fetch(`PASTE_YOUR_LINK?action=checkStatus&topic=${encodeURIComponent(topic)}`)
   fetch(`https://script.google.com/macros/s/AKfycbyvLjheYK-3NOFHVN01ATl2KftiENYy58sM9IA6QGDroiemY406KPuRp_BFvHE-muyG/exec?action=checkStatus&topic=${encodeURIComponent(topic)}`)
     .then(res => res.json())
     .then(data => {
@@ -333,7 +334,7 @@ function submitComment() {
 
   submitBtn.disabled = true;
   submitBtn.innerHTML = `<span class="spinner"></span> Posting...`;
-
+//PASTE_YOUR_LINK HERE
   fetch('https://script.google.com/macros/s/AKfycbyvLjheYK-3NOFHVN01ATl2KftiENYy58sM9IA6QGDroiemY406KPuRp_BFvHE-muyG/exec', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
@@ -387,7 +388,7 @@ function fetchComments(order = 'desc') {
       </div>
     </div>
   `).join('');
-// change according to your link
+// change according to your link fetch(`PASTE_YOUR_LINK_LIKE_THIS?topic=${encodeURIComponent(topic)}`)
   fetch(`https://script.google.com/macros/s/AKfycbyvLjheYK-3NOFHVN01ATl2KftiENYy58sM9IA6QGDroiemY406KPuRp_BFvHE-muyG/exec?topic=${encodeURIComponent(topic)}`)
     .then(res => res.json())
     .then(data => {
@@ -443,7 +444,7 @@ function createCommentElement(comment) {
   avatar.classList.add('comment-avatar');
 
   const isAdminUser = comment.isAdmin === true || comment.isAdmin === 'true';
-
+//CHANGE AVATAR PFP
   if (isAdminUser) {
     avatar.innerHTML = '<img src="https://avatars.githubusercontent.com/u/123620381?v=4&size=64" class="comment-avatar" alt="Admin Avatar">';
   } else {
